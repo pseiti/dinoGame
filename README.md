@@ -1,1 +1,1 @@
-# dinoGame with some changes
+# dinoGame
