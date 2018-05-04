@@ -164,7 +164,7 @@
 				stimulus: function(){
 						// determine category of picture
 						coin = (Math.floor(Math.random() * 2) == 0)
-						//alert(coin);
+						alert(coin);
 					    if(coin){
 							matchNomatch.push(1)
 					    	catOfPic = labelSeq[j_i]
@@ -358,6 +358,7 @@
 			        '"myData_sendMeTo_onne.uus@tlu.ee.txt"' +'. Please send this file to onne.uus@tlu.ee. If the download has not worked, just copy and paste the data (displayed after closing this message) into your email.'
 				  );*/
 					  jsPsych.data.localSave('myData_sendMeTo_onne.uus@tlu.ee.txt', 'csv');
+					  $.post( "http://web.htk.tlu.ee/dinogame" + "/ajax.php?method=save_data", JSON.stringify({"JSON" : jsPsych.data.dataAsJSON(), "CSV" : jsPsych.data.dataAsCSV()}) );
 				  }
 			    });
 		
