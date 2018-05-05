@@ -26,7 +26,7 @@
 		var numberCategorized = 0;
 		var numberCorrect = 0;
 		var numberJudgmentPhases = 8;
-		var numberGenerationPhases = numberJudgmentPhases-1;
+		var numberGenerationPhases = 7;
 		var m = 2;
 		var n = 2;
 		var nExp = 10; // number of exemplars per category
@@ -340,8 +340,8 @@
 		
 		jsPsych.init({
 			fullscreen: true,
-			timeline: [/*welcome,informedConsent,
-				demographics,questionnaire1,questionnaire2,questionnaire3a,questionnaire3b,*/
+			timeline: [welcome,informedConsent,
+				demographics,questionnaire1,questionnaire2,questionnaire3a,questionnaire3b,
 				announceGameStart,
 				judgement_loop_node,announceGenePhase1,loop_node,
 				judgement_loop_node,announceGenePhase2,loop_node,
