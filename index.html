@@ -26,15 +26,15 @@
 		var numberCategorized = 0;
 		var numberCorrect = 0;
 		var numberJudgmentPhases = 8;
-		var numberGenerationPhases = 7;
+		var numberGenerationPhases = numberJudgmentPhases-1;
 		var m = 2;
 		var n = 2;
 		var nExp = 10; // number of exemplars per category
 		var nSec = 60;
 		var geneDuration = 1000*nSec;
 		var iter = 0
-		var categories = ["Pisanosaurus",'Rinchenia','Edmontosaurus','Parasaurolophus','Rhamphorhynchinae','Rhamphorhynchinae','Pteranodontia','Pteranodontia']
-		var category_buttons = ["Pisanosaurus",'Rinchenia','Edmontosaurus','Parasaurolophus','Rhamphorhynchinae','Pteranodontia']
+		var categories = ["Ornithoscelida",'Ornithoscelida','Saurolophidae','Saurolophidae','Dorygnathus','Scaphognathus','Istiodactylus','Pteranodon']
+		var category_buttons = ["Ornithoscelida",'Saurolophidae','Dorygnathus','Scaphognathus','Istiodactylus','Pteranodon']
 		var nCat = category_buttons.length
 		var genPhase = 1;
 		
@@ -146,6 +146,8 @@
 						show_clickable_nav: true,
 		   		   			on_finish: function(data) { 
 		   		   				j_i=0
+								labelSeq = [0,1,2,3,4,5]
+								//labelSeq = jsPsych.randomization.repeat(labelSeq, 1)
 								labelSeq = catsForJudgFx()
 								presentedNamesDigits = []
 								presentedNamesLabels = []
@@ -170,9 +172,9 @@
 					    	catOfPic = labelSeq[j_i]
 					    }else{
 							matchNomatch.push(0);
-							//DisplayedLabel = categories[labelSeq[j_i]]
+							/*DisplayedLabel = categories[labelSeq[j_i]]
 							catOfPic = labelSeq[j_i_for_noMatchFx(j_i)];
-							/*DisplayedPic = categories[catOfPic]
+							DisplayedPic = categories[catOfPic]
 							alertText = [DisplayedLabel,DisplayedPic]
 							alert(alertText)*/
 					    }
@@ -182,7 +184,8 @@
 					    presentedNamesDigits.push(labelSeq[j_i])
 					    presentedNamesLabels.push(categories[labelSeq[j_i]])
 						// determine exemplar
-						expx = Math.floor(Math.random() * (nExp - 0) ) + 0;
+						maxx = nExp
+						expx = Math.floor(Math.random() * (maxx - 0) ) + 0;
 						return pictures[catOfPic][expx]
 				},
 				/*questions: function (){ return ["<b>Kui suure t&otildeen&aumlosusega kuulub antud loom kategooriasse:<b style='color:MediumSeaGreen;'> "+category_buttons[labelSeq[j_i]]+" </b>?"]},*/
@@ -338,9 +341,43 @@
 			  
 		};
 		
+		var i=0;
+		var j=0;
+		var diashow = {
+			type: 'button-response',
+			is_html: false,
+			stimulus: function(){
+				
+					return pictures[i][j]
+				
+				},
+			prompt: function(){return "exemplar: "+(j+1)+", category: "+(i+1)+""},
+			choices: ["Edasi"],
+			on_finish: function(data) { 
+   				j+=1
+   				if(j==10){
+   					i+=1
+   					j=0
+   				}
+   			}
+		};
+		
+		var dialoop = {
+			timeline: [diashow],
+			loop_function: function(data){
+			        
+					if(i < 8){
+			            return true;
+			        } else {
+			            return false;
+			        }
+			  }
+			  
+		};
+
 		jsPsych.init({
 			fullscreen: true,
-			timeline: [welcome,informedConsent,
+			timeline: [/*welcome,informedConsent,
 				demographics,questionnaire1,questionnaire2,questionnaire3a,questionnaire3b,
 				announceGameStart,
 				judgement_loop_node,announceGenePhase1,loop_node,
@@ -351,7 +388,8 @@
 				judgement_loop_node,announceGenePhase2,loop_node,
 				judgement_loop_node,announceGenePhase2,loop_node,
 				judgement_loop_node,
-				goodBye
+				goodBye*/
+				dialoop
 			],
 				  on_finish: function() {                                                                 					  /*jsPsych.data.displayData();
 			      alert('Your data' +' have been stored as a textfile in your download folder with the name ' +
