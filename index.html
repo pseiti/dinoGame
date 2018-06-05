@@ -340,44 +340,10 @@
    			}
 			  
 		};
-		
-		var i=0;
-		var j=0;
-		var diashow = {
-			type: 'button-response',
-			is_html: false,
-			stimulus: function(){
-				
-					return pictures[i][j]
-				
-				},
-			prompt: function(){return "exemplar: "+(j+1)+", category: "+(i+1)+""},
-			choices: ["Edasi"],
-			on_finish: function(data) { 
-   				j+=1
-   				if(j==10){
-   					i+=1
-   					j=0
-   				}
-   			}
-		};
-		
-		var dialoop = {
-			timeline: [diashow],
-			loop_function: function(data){
-			        
-					if(i < 8){
-			            return true;
-			        } else {
-			            return false;
-			        }
-			  }
-			  
-		};
 
 		jsPsych.init({
 			fullscreen: true,
-			timeline: [/*welcome,informedConsent,
+			timeline: [welcome,informedConsent,
 				demographics,questionnaire1,questionnaire2,questionnaire3a,questionnaire3b,
 				announceGameStart,
 				judgement_loop_node,announceGenePhase1,loop_node,
@@ -388,8 +354,7 @@
 				judgement_loop_node,announceGenePhase2,loop_node,
 				judgement_loop_node,announceGenePhase2,loop_node,
 				judgement_loop_node,
-				goodBye*/
-				dialoop
+				goodBye
 			],
 				  on_finish: function() {                                                                 					  /*jsPsych.data.displayData();
 			      alert('Your data' +' have been stored as a textfile in your download folder with the name ' +
