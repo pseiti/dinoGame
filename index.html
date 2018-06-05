@@ -26,11 +26,11 @@
 		var numberCategorized = 0;
 		var numberCorrect = 0;
 		var numberJudgmentPhases = 8;
-		var numberGenerationPhases = numberJudgmentPhases-1;
+		var numberGenerationPhases = 7;
 		var m = 2;
 		var n = 2;
 		var nExp = 10; // number of exemplars per category
-		var nSec = 60;
+		var nSec = 1;
 		var geneDuration = 1000*nSec;
 		var iter = 0
 		var categories = ["Ornithoscelida",'Ornithoscelida','Saurolophidae','Saurolophidae','Dorygnathus','Scaphognathus','Istiodactylus','Pteranodon']
@@ -146,8 +146,6 @@
 						show_clickable_nav: true,
 		   		   			on_finish: function(data) { 
 		   		   				j_i=0
-								labelSeq = [0,1,2,3,4,5]
-								//labelSeq = jsPsych.randomization.repeat(labelSeq, 1)
 								labelSeq = catsForJudgFx()
 								presentedNamesDigits = []
 								presentedNamesLabels = []
@@ -172,9 +170,9 @@
 					    	catOfPic = labelSeq[j_i]
 					    }else{
 							matchNomatch.push(0);
-							/*DisplayedLabel = categories[labelSeq[j_i]]
+							//DisplayedLabel = categories[labelSeq[j_i]]
 							catOfPic = labelSeq[j_i_for_noMatchFx(j_i)];
-							DisplayedPic = categories[catOfPic]
+							/*DisplayedPic = categories[catOfPic]
 							alertText = [DisplayedLabel,DisplayedPic]
 							alert(alertText)*/
 					    }
@@ -184,8 +182,7 @@
 					    presentedNamesDigits.push(labelSeq[j_i])
 					    presentedNamesLabels.push(categories[labelSeq[j_i]])
 						// determine exemplar
-						maxx = nExp
-						expx = Math.floor(Math.random() * (maxx - 0) ) + 0;
+						expx = Math.floor(Math.random() * (nExp - 0) ) + 0;
 						return pictures[catOfPic][expx]
 				},
 				/*questions: function (){ return ["<b>Kui suure t&otildeen&aumlosusega kuulub antud loom kategooriasse:<b style='color:MediumSeaGreen;'> "+category_buttons[labelSeq[j_i]]+" </b>?"]},*/
@@ -340,7 +337,7 @@
    			}
 			  
 		};
-
+		
 		jsPsych.init({
 			fullscreen: true,
 			timeline: [welcome,informedConsent,
